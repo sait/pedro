@@ -1,0 +1,729 @@
+<?xml version = "1.0" encoding="UTF-8" standalone="yes"?>
+<VFPData>
+	<record>
+		<platform>COMMENT</platform>
+		<uniqueid>Screen</uniqueid>
+		<timestamp>0</timestamp>
+		<class/>
+		<classloc/>
+		<baseclass/>
+		<objname/>
+		<parent/>
+		<properties/>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1>VERSION =   3.00</reserved1>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_6GQ0QW3B8</uniqueid>
+		<timestamp>1432314904</timestamp>
+		<class>dataenvironment</class>
+		<classloc/>
+		<baseclass>dataenvironment</baseclass>
+		<objname>Dataenvironment</objname>
+		<parent/>
+		<properties>Name = "Dataenvironment"
+</properties>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2>1</reserved2>
+		<reserved3/>
+		<reserved4>2</reserved4>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_6GQ0QW3B9</uniqueid>
+		<timestamp>1432323571</timestamp>
+		<class>formamsl</class>
+		<classloc>..\..\..\msllib60\msllib60.vcx</classloc>
+		<baseclass>form</baseclass>
+		<objname>Formamsl1</objname>
+		<parent/>
+		<properties>DoCreate = .T.
+Caption = "Agregar Alumno"
+Name = "Formamsl1"
+Marco.Name = "Marco"
+</properties>
+		<protected/>
+		<methods>PROCEDURE Init
+*
+*	init()
+*
+
+LParameter nModo, nRec
+
+*
+* nModo
+*	1 = Agregar
+*	2 = Modificar
+*	3 = Eliminar
+*
+
+if not OpenDbf('','')
+	retur .f.
+endif
+
+with thisform
+	if PCount() == 0
+		nModo = 1
+	endif
+	
+	.nModo = nModo
+	
+	if(.nModo == 2 OR .nModo ==3)
+		if(nRec &lt;= 0 OR nRec &gt; Reccount())
+			Alerta('Registro no valido')
+			return .f.
+		endif
+		goto nRec
+	endif
+	
+	do case
+		case .nModo == 1
+			.Caption = 'Agregar Alumno'
+			.btnGrabar.Caption = '\&lt;Agregar'
+			Select Alumnos
+			goto bott
+			.Clave.Value = PadL(Allt(SigDoc(ID)),5)
+			
+		case .nModo == 2
+			.Caption = 'Modificar Alumno'
+			.btnGrabar.Caption = '\&lt;Modificar'
+			.Clave.Enabled = .f.
+			.CargarInfo()
+			
+		case nModo == 3
+			.Caption = 'Eliminar Alumno'
+			.btnGrabar.Caption = '\&lt;Eliminar'
+			.CargarInfo()
+			.SetAll('enabled',.f.)
+			.btnGrabar.enabled = .t.
+			.btnCerrar.enabled = .t.
+		endcase
+endwith
+ENDPROC
+PROCEDURE cargarinfo
+*
+*	CargarInfo()
+*
+
+* Params
+*	Clave = Identificador de la tabla
+*	Nombre = Nombre del alumno
+*	Apellidos = Apelldios del alumno
+*	Grado = maximo un caracter ejemplo: 1, 2 o 3
+*	Grupo = maximo un caracter ejemplo: A, B o C
+*	Matricula = numero de expediente del alumno
+*	FechaNac = Fecha de nacimiento
+*
+
+with thisform
+	.txtClave.Value = Alumnos.ID
+	.txtNombre = Alumnos.NOMBRE
+	.txtApellidos = Alumnos.APELLIDOS
+	.txtGrado = Alumnos.GRADO
+	.txtGrupo = Alumnos.GRUPO
+	.txtMatricula = Alumnos.MATRICULA
+	.txtFechaNac = Alumnos.FECHANAC
+endwith
+
+ENDPROC
+PROCEDURE saveinfo
+*
+*	SaveInfo()
+*	
+
+with thisform
+	select Alumnos
+	replace ID 			with .txtClave.Value,;
+			NOMBRE 		with Allt(.txtNomre.Value),;
+			APELLIDOS 	with Allt(.txtApellidos.Value),;
+			GRADO 		with Allt(.txtGrado.Value),;
+			GRUPO 		with Allt(.txtGrupo.Value),;
+			MATRICULA 	with Allt(.txtMatricula.Value),;
+			FECHANAC 	with Allt(.txtFechaNac.Value)
+endwith
+
+ENDPROC
+</methods>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3>nmodo Modo de la ventana
+*cargarinfo Metodo para cargar la informacion
+*saveinfo Metodo para guardar informacion
+</reserved3>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_6GQ0QW3BA</uniqueid>
+		<timestamp>1432314904</timestamp>
+		<class>leyenda</class>
+		<classloc>..\..\..\msllib60\msllib60.vcx</classloc>
+		<baseclass>label</baseclass>
+		<objname>Leyenda1</objname>
+		<parent>Formamsl1</parent>
+		<properties>Caption = "Id"
+Left = 100
+Top = 19
+Name = "Leyenda1"
+</properties>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_6GQ0QW3BB</uniqueid>
+		<timestamp>1432319544</timestamp>
+		<class>texto</class>
+		<classloc>..\..\..\msllib60\msllib60.vcx</classloc>
+		<baseclass>textbox</baseclass>
+		<objname>txtClave</objname>
+		<parent>Formamsl1</parent>
+		<properties>Height = 21
+Left = 111
+Top = 17
+Width = 45
+Name = "txtClave"
+</properties>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_6GQ0QW3BC</uniqueid>
+		<timestamp>1432314904</timestamp>
+		<class>leyenda</class>
+		<classloc>..\..\..\msllib60\msllib60.vcx</classloc>
+		<baseclass>label</baseclass>
+		<objname>Leyenda2</objname>
+		<parent>Formamsl1</parent>
+		<properties>Caption = "Nombre"
+Left = 71
+Top = 45
+Name = "Leyenda2"
+</properties>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_6GQ0QW3BD</uniqueid>
+		<timestamp>1432314904</timestamp>
+		<class>leyenda</class>
+		<classloc>..\..\..\msllib60\msllib60.vcx</classloc>
+		<baseclass>label</baseclass>
+		<objname>Leyenda3</objname>
+		<parent>Formamsl1</parent>
+		<properties>Caption = "Apellidos"
+Left = 65
+Top = 69
+Name = "Leyenda3"
+</properties>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_6GQ0QW3BE</uniqueid>
+		<timestamp>1432314904</timestamp>
+		<class>leyenda</class>
+		<classloc>..\..\..\msllib60\msllib60.vcx</classloc>
+		<baseclass>label</baseclass>
+		<objname>Leyenda4</objname>
+		<parent>Formamsl1</parent>
+		<properties>Caption = "Grado"
+Left = 80
+Top = 92
+Name = "Leyenda4"
+</properties>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_6GQ0QW3BF</uniqueid>
+		<timestamp>1432314904</timestamp>
+		<class>leyenda</class>
+		<classloc>..\..\..\msllib60\msllib60.vcx</classloc>
+		<baseclass>label</baseclass>
+		<objname>Leyenda5</objname>
+		<parent>Formamsl1</parent>
+		<properties>Caption = "Grupo"
+Left = 78
+Top = 117
+Name = "Leyenda5"
+</properties>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_6GQ0QW3BG</uniqueid>
+		<timestamp>1432314904</timestamp>
+		<class>leyenda</class>
+		<classloc>..\..\..\msllib60\msllib60.vcx</classloc>
+		<baseclass>label</baseclass>
+		<objname>Leyenda6</objname>
+		<parent>Formamsl1</parent>
+		<properties>Caption = "Matricula"
+Left = 66
+Top = 142
+Name = "Leyenda6"
+</properties>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_6GQ0QW3BH</uniqueid>
+		<timestamp>1432314904</timestamp>
+		<class>leyenda</class>
+		<classloc>..\..\..\msllib60\msllib60.vcx</classloc>
+		<baseclass>label</baseclass>
+		<objname>Leyenda7</objname>
+		<parent>Formamsl1</parent>
+		<properties>Caption = "Fecha Nacimiento"
+Left = 24
+Top = 168
+Name = "Leyenda7"
+</properties>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_6GQ0QW3BI</uniqueid>
+		<timestamp>1432319544</timestamp>
+		<class>texto</class>
+		<classloc>..\..\..\msllib60\msllib60.vcx</classloc>
+		<baseclass>textbox</baseclass>
+		<objname>txtNombre</objname>
+		<parent>Formamsl1</parent>
+		<properties>Height = 21
+Left = 111
+Top = 43
+Width = 190
+Name = "txtNombre"
+</properties>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_6GQ0QW3BJ</uniqueid>
+		<timestamp>1432319544</timestamp>
+		<class>texto</class>
+		<classloc>..\..\..\msllib60\msllib60.vcx</classloc>
+		<baseclass>textbox</baseclass>
+		<objname>txtApellidos</objname>
+		<parent>Formamsl1</parent>
+		<properties>Height = 21
+Left = 111
+Top = 67
+Width = 190
+Name = "txtApellidos"
+</properties>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_6GQ0QW3BK</uniqueid>
+		<timestamp>1432319544</timestamp>
+		<class>texto</class>
+		<classloc>..\..\..\msllib60\msllib60.vcx</classloc>
+		<baseclass>textbox</baseclass>
+		<objname>txtGrado</objname>
+		<parent>Formamsl1</parent>
+		<properties>Height = 21
+Left = 111
+Top = 90
+Width = 45
+Name = "txtGrado"
+</properties>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_6GQ0QW3BL</uniqueid>
+		<timestamp>1432319544</timestamp>
+		<class>texto</class>
+		<classloc>..\..\..\msllib60\msllib60.vcx</classloc>
+		<baseclass>textbox</baseclass>
+		<objname>txtGrupo</objname>
+		<parent>Formamsl1</parent>
+		<properties>Height = 21
+Left = 111
+Top = 115
+Width = 45
+Name = "txtGrupo"
+</properties>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_6GQ0QW3BM</uniqueid>
+		<timestamp>1432319544</timestamp>
+		<class>texto</class>
+		<classloc>..\..\..\msllib60\msllib60.vcx</classloc>
+		<baseclass>textbox</baseclass>
+		<objname>txtMatricula</objname>
+		<parent>Formamsl1</parent>
+		<properties>Height = 21
+Left = 111
+Top = 140
+Width = 100
+Name = "txtMatricula"
+</properties>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_6GQ0QW3BN</uniqueid>
+		<timestamp>1432318949</timestamp>
+		<class>textofecha</class>
+		<classloc>..\..\..\msllib60\msllib60.vcx</classloc>
+		<baseclass>textbox</baseclass>
+		<objname>txtFechaNac</objname>
+		<parent>Formamsl1</parent>
+		<properties>Height = 21
+Left = 111
+Top = 165
+Width = 100
+Name = "txtFechaNac"
+</properties>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_6GQ0QW3BO</uniqueid>
+		<timestamp>1432319866</timestamp>
+		<class>boton</class>
+		<classloc>..\..\..\msllib60\msllib60.vcx</classloc>
+		<baseclass>commandbutton</baseclass>
+		<objname>btnGuardar</objname>
+		<parent>Formamsl1</parent>
+		<properties>Top = 210
+Left = 90
+Caption = "\&lt;Grabar"
+Name = "btnGuardar"
+</properties>
+		<protected/>
+		<methods>PROCEDURE Click
+*
+*	btnGuardar()
+*
+
+with thisform
+	if(.nModo &lt;= 2)
+		if .nModo == 1
+			if empty(.txtClave.Value)
+				Alerta('No se puede omitir la clave del alumno')
+				.Clave.SetFocus()
+				return .f.
+			endif
+			
+			if seek(PadL(Allt(.Clave.Value), 5), 'Alumnos')
+				Alerta('Ya existe un alumno con la misma clave')
+				.Clave.SetFocus()
+				return .f.
+			endif
+	endif
+			if empty(.txtNombre.Value)
+				Alerta('No se puede omitir el nombre')
+				.txtNombre.SetFocus()
+				return .f.
+			endif
+		endif
+		
+		do case
+			case nModo == 1
+				select Alumnos
+				Append blank
+				.SaveInfo()
+				.Release
+			case nModo == 2
+				.SaveInfo()
+				.Release
+			case nModo == 3
+				if GetNY('¿Desea eliminar el alumno?')
+					select Alumnos
+					Delete
+				endif
+				.Release
+		endcase
+endwith
+ENDPROC
+</methods>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_6GQ0QW3BP</uniqueid>
+		<timestamp>1432319866</timestamp>
+		<class>closebutton</class>
+		<classloc>..\..\..\msllib60\msllib60.vcx</classloc>
+		<baseclass>commandbutton</baseclass>
+		<objname>btnCerrar</objname>
+		<parent>Formamsl1</parent>
+		<properties>Top = 210
+Left = 205
+Caption = "\&lt;Cerrar"
+Name = "btnCerrar"
+</properties>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>COMMENT</platform>
+		<uniqueid>RESERVED</uniqueid>
+		<timestamp>0</timestamp>
+		<class/>
+		<classloc/>
+		<baseclass/>
+		<objname/>
+		<parent/>
+		<properties>Arial, 0, 9, 5, 15, 12, 32, 3, 0
+Arial, 0, 8, 5, 14, 11, 29, 3, 0
+</properties>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+</VFPData>

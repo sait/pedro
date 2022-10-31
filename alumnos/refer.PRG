@@ -1,0 +1,126 @@
+Function SiAcceso
+Function NoAcceso
+Function UserVal
+Function INITSESSION
+Function OpenDbf
+Function AddBar
+Function SigDoc
+Function Alerta
+Function Aviso
+Function GetNY
+Function GetYN
+Function Bloquea
+Function InitPje
+Function ActPje
+Function ClosePje
+Function SendRep
+Function SendFto
+Function DelAlias
+Function SqlMsl
+Function SToD
+Function GetMsl
+Function PutMsl
+Function SubLin
+Function MexDate2
+Function MexDate3
+Function OpVentas
+Function CopyToAClip
+
+Function BUSCART
+Function SDADDEVENT 
+Function SDINICIAEVENTO 
+Function SDADDREG 
+Function SDGENERAEVENTO2 
+Function EVENTOXML 
+Function VALDEP 
+Function BUSCACOD 
+Function F2BUSCART 
+Function MASCCTA 
+Function DESCCTA 
+
+
+*!*	    Form LISTCATE - Undefined
+*!*	    Form LISTDEPT - Undefined
+*!*	    Form CONFREP - Undefined
+*!*	    Form LISTLINE - Undefined
+*!*	    Form LISTALM - Undefined
+*!*	    Form SELCTA - Undefined
+
+
+Function CATMSLCONSULTAR 
+Function CATMSLBORRATEMP 
+Function CATMSLACTIVATE 
+Function CATMSLEDITARVISTAS 
+Function CATMSLCARGAVISTAS 
+Function CATMSLGUARDARANCHOS 
+Function CATMSLGRIDSETFOCUS 
+Function OPENEXCEL 
+Function CATMSLBUSCARCLICK 
+Function CATMSLIMPRIMIRCLICK 
+Function BUSQUEDAUNLOAD
+Function BUSQUEDABUSCAR
+Function DATEPICKSELECCIONO
+Function LEEFECHASETVALUE
+Function LEEFECHAERROR
+Function LEEFECHAGOTFOCUS
+Function LEEFECHAINIT
+Function LEEFECHALOSTFOCUS
+Function LEEFECHAFECHAGOTFOCUS
+Function LEEFECHAFECHAVALID
+Function LEEFECHABUSCARGOTFOCUS
+Function LEEFECHABUSCARCLICK
+Function LEECVEENABLED_ASSIGN
+Function LEECVESETVALUE
+Function LEECVEGOTFOCUS
+Function LEECVEINIT
+Function LEECVECLAVEVALID
+Function LEECVEBUSCARCLICK
+Function TEXTOFECHASETVALUE
+Function TEXTOFECHALOSTFOCUS
+Function TEXTOFECHAGOTFOCUS
+Function TEXTOFECHAINIT
+Function LEERNOMBRELOSTFOCUS
+Function LEERNOMBREGOTFOCUS
+Function LEERNOMBRENOMBREINTERACTIVECHANGE
+Function LEERNOMBRENOMBREVALID
+Function LEERNOMBREABRIRLISTACLICK
+Function LEENOMBRELOSTFOCUS 
+Function LEENOMBREGOTFOCUS 
+Function LEENOMBRENOMBREINTERACTIVECHANGE
+Function LEENOMBRENOMBREVALID 
+
+
+function EXISTECAMPO
+function QUITIT
+function domodal
+function TCDOF
+function ADDFE
+function ADDCXC
+function ITEMSINLIST
+function ITEMOFLIST
+function OPENEXCL
+function CAMPOAREA
+function MEXDATE
+function ADDCAJA
+function OPCIONM
+function SDACTREG
+function SDDELREG
+function SPLITNUMDOC
+function SENDFTO2
+function CLIP2CUR
+function ACTPRECIOS
+function TRUNCARCODIGOARTS
+function XML2OBJ
+function JSONGETPROP
+function GETMUNEDOFROMCP
+function JSON_ENCODE
+function CREARCARTAPORTE
+function GETXMLFROMUUID
+function GETSPECIALFOLDER
+function SHELLEXCE
+Program CFDI33PRINT
+Form SELDESTNEW
+Program SENDMAILSAIT
+function REFRESHTOOLBAR
+function ROUNDOK
+function DELROW
