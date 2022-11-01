@@ -2,6 +2,12 @@
 * Alumnos()
 *
 
+*
+* Params
+*	@Ventas: nombre del menu
+*	@Alumnos: nombre del submenu
+*	@do doForm: ejecuta un programa para añadir el submenu
+
 procedure alumnos
 	addBar('Ventas','Alumnos','do doForm with "alumnoscat" in Alumnos.app')
 	crearCampos()
@@ -39,6 +45,7 @@ return
 *
 *	CrearCampos()
 *
+*	Si no existe el archivo alumnos.dbf la funcion lo crea
 
 procedure crearCampos
 	if not file('alumnos.dbf')
