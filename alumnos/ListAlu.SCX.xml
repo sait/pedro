@@ -1,0 +1,132 @@
+<?xml version = "1.0" encoding="UTF-8" standalone="yes"?>
+<VFPData>
+	<record>
+		<platform>COMMENT</platform>
+		<uniqueid>Screen</uniqueid>
+		<timestamp>0</timestamp>
+		<class/>
+		<classloc/>
+		<baseclass/>
+		<objname/>
+		<parent/>
+		<properties/>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1>VERSION =   3.00</reserved1>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_6GR0P41HC</uniqueid>
+		<timestamp>1432444256</timestamp>
+		<class>dataenvironment</class>
+		<classloc/>
+		<baseclass>dataenvironment</baseclass>
+		<objname>Dataenvironment</objname>
+		<parent/>
+		<properties>Name = "Dataenvironment"
+</properties>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2>1</reserved2>
+		<reserved3/>
+		<reserved4>2</reserved4>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>WINDOWS</platform>
+		<uniqueid>_6GR0P41HD</uniqueid>
+		<timestamp>1432444256</timestamp>
+		<class>busqueda</class>
+		<classloc>..\..\..\msllib60\msllib60.vcx</classloc>
+		<baseclass>form</baseclass>
+		<objname>Busqueda1</objname>
+		<parent/>
+		<properties>DoCreate = .T.
+Name = "Busqueda1"
+Marco.Name = "Marco"
+Label1.Name = "Label1"
+Text1.Name = "Text1"
+List1.Name = "List1"
+</properties>
+		<protected/>
+		<methods>PROCEDURE Init
+busqueda.init
+
+* Ancho en píxeles, de las columnas
+this.anchos = '50,100,100,50,50,80,100'
+* Campos en dónde se buscará la información capturada por el usuario.
+this.ccamposbuscar = 'NOMBRE, APELLIDOS, GRADO, GRUPO'
+* Campos a seleccionar en la sentencia Select.
+this.ccamposelect = 'NOMBRE, ID, APELLIDOS, GRADO, GRUPO'
+* Expresiones a desplegar en cada columna de la lista.
+this.cexprs = 'ID, NOMBRE, APELLIDOS, GRADO, GRUPO, MATRICULA, FECHANAC'
+* Tabla en dónde buscaremos.
+this.frontable = 'ALUMNOS'
+* Campo que usaremos para ordenar el resultado de la sentencia Select.
+this.orderby = ''
+* Nombre del campo a regresar como resultado de la búsqueda.
+this.retval = 'ID'
+* SQL a realizar para la búsqueda.
+this.csql = ''
+ENDPROC
+</methods>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+	<record>
+		<platform>COMMENT</platform>
+		<uniqueid>RESERVED</uniqueid>
+		<timestamp>0</timestamp>
+		<class/>
+		<classloc/>
+		<baseclass/>
+		<objname/>
+		<parent/>
+		<properties>Arial, 0, 9, 5, 15, 12, 32, 3, 0
+Arial, 0, 8, 5, 14, 11, 29, 3, 0
+</properties>
+		<protected/>
+		<methods/>
+		<objcode/>
+		<ole/>
+		<ole2/>
+		<reserved1/>
+		<reserved2/>
+		<reserved3/>
+		<reserved4/>
+		<reserved5/>
+		<reserved6/>
+		<reserved7/>
+		<reserved8/>
+		<user/>
+	</record>
+</VFPData>
