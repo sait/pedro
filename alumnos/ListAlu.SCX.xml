@@ -54,7 +54,7 @@
 	<record>
 		<platform>WINDOWS</platform>
 		<uniqueid>_6GR0P41HD</uniqueid>
-		<timestamp>1432444256</timestamp>
+		<timestamp>1432701792</timestamp>
 		<class>busqueda</class>
 		<classloc>..\..\..\msllib60\msllib60.vcx</classloc>
 		<baseclass>form</baseclass>
@@ -69,24 +69,20 @@ List1.Name = "List1"
 </properties>
 		<protected/>
 		<methods>PROCEDURE Init
-busqueda.init
+*
+*	busqueda.init ()
+*
 
-* Ancho en píxeles, de las columnas
-this.anchos = '50,100,100,50,50,80,100'
-* Campos en dónde se buscará la información capturada por el usuario.
-this.ccamposbuscar = 'NOMBRE, APELLIDOS, GRADO, GRUPO'
-* Campos a seleccionar en la sentencia Select.
-this.ccamposelect = 'NOMBRE, ID, APELLIDOS, GRADO, GRUPO'
-* Expresiones a desplegar en cada columna de la lista.
-this.cexprs = 'ID, NOMBRE, APELLIDOS, GRADO, GRUPO, MATRICULA, FECHANAC'
-* Tabla en dónde buscaremos.
-this.frontable = 'ALUMNOS'
-* Campo que usaremos para ordenar el resultado de la sentencia Select.
-this.orderby = ''
-* Nombre del campo a regresar como resultado de la búsqueda.
-this.retval = 'ID'
-* SQL a realizar para la búsqueda.
-this.csql = ''
+with thisform
+	.cAnchos = '50,75,100'
+	.cCamposBuscar = 'NOMBRE'
+	.cCamposSelect = '*'
+	.cExprs = 'ID, NOMBRE, APELLIDOS'
+	.cFromTable = 'Alumnos'
+	.cOrderBy = 'NOMBRE'
+	.cRetVal = 'ID'
+	.cSql = ''
+endwith
 ENDPROC
 </methods>
 		<objcode/>

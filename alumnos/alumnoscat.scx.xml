@@ -54,7 +54,7 @@
 	<record>
 		<platform>WINDOWS</platform>
 		<uniqueid>_6GQ0NVQG4</uniqueid>
-		<timestamp>1432323607</timestamp>
+		<timestamp>1432575056</timestamp>
 		<class>catmsl</class>
 		<classloc>..\..\..\msllib60\catmsl.vcx</classloc>
 		<baseclass>form</baseclass>
@@ -80,7 +80,23 @@ Imprimir.Name = "Imprimir"
 Cerrar.Name = "Cerrar"
 </properties>
 		<protected/>
-		<methods>PROCEDURE Init
+		<methods>PROCEDURE Buscar.Click
+noDefault
+*
+* Buscar.click()
+*
+local cNumCom
+
+cNumCom = ''
+do form ListAlu to cNumCom
+
+if not empty(cNumCom)
+select Alumnos
+=seek(cNumCom)
+ThisForm.Grid1.refresh()
+endif
+ENDPROC
+PROCEDURE Init
 *
 *	init()
 *

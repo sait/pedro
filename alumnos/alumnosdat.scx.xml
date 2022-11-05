@@ -54,7 +54,7 @@
 	<record>
 		<platform>WINDOWS</platform>
 		<uniqueid>_6GQ0QW3B9</uniqueid>
-		<timestamp>1432323571</timestamp>
+		<timestamp>1432452861</timestamp>
 		<class>formamsl</class>
 		<classloc>..\..\..\msllib60\msllib60.vcx</classloc>
 		<baseclass>form</baseclass>
@@ -70,7 +70,6 @@ Marco.Name = "Marco"
 *
 *	init()
 *
-
 LParameter nModo, nRec
 
 *
@@ -80,11 +79,12 @@ LParameter nModo, nRec
 *	3 = Eliminar
 *
 
-if not OpenDbf('','')
-	retur .f.
-endif
+if not OpenDbf('Alumnos', 'ID')
+	return .F.
+EndIf
 
 with thisform
+	.txtFechaNac.SetValue(date())
 	if PCount() == 0
 		nModo = 1
 	endif
@@ -102,23 +102,23 @@ with thisform
 	do case
 		case .nModo == 1
 			.Caption = 'Agregar Alumno'
-			.btnGrabar.Caption = '\&lt;Agregar'
+			.btnGuardar.Caption = '\&lt;Agregar'
 			Select Alumnos
 			goto bott
-			.Clave.Value = PadL(Allt(SigDoc(ID)),5)
+			.txtClave.Value = PadL(Allt(SigDoc(ID)),5)
 			
 		case .nModo == 2
 			.Caption = 'Modificar Alumno'
-			.btnGrabar.Caption = '\&lt;Modificar'
-			.Clave.Enabled = .f.
+			.btnGuardar.Caption = '\&lt;Modificar'
+			.txtClave.Enabled = .f.
 			.CargarInfo()
 			
 		case nModo == 3
 			.Caption = 'Eliminar Alumno'
-			.btnGrabar.Caption = '\&lt;Eliminar'
+			.btnGuardar.Caption = '\&lt;Eliminar'
 			.CargarInfo()
 			.SetAll('enabled',.f.)
-			.btnGrabar.enabled = .t.
+			.btnGuardar.enabled = .t.
 			.btnCerrar.enabled = .t.
 		endcase
 endwith
@@ -140,12 +140,12 @@ PROCEDURE cargarinfo
 
 with thisform
 	.txtClave.Value = Alumnos.ID
-	.txtNombre = Alumnos.NOMBRE
-	.txtApellidos = Alumnos.APELLIDOS
-	.txtGrado = Alumnos.GRADO
-	.txtGrupo = Alumnos.GRUPO
-	.txtMatricula = Alumnos.MATRICULA
-	.txtFechaNac = Alumnos.FECHANAC
+	.txtNombre.Value = Alumnos.NOMBRE
+	.txtApellidos.Value = Alumnos.APELLIDOS
+	.txtGrado.Value = Alumnos.GRADO
+	.txtGrupo.Value = Alumnos.GRUPO
+	.txtMatricula.Value = Alumnos.MATRICULA
+	.txtFechaNac.Value = Alumnos.FECHANAC
 endwith
 
 ENDPROC
@@ -157,12 +157,12 @@ PROCEDURE saveinfo
 with thisform
 	select Alumnos
 	replace ID 			with .txtClave.Value,;
-			NOMBRE 		with Allt(.txtNomre.Value),;
+			NOMBRE 		with Allt(.txtNombre.Value),;
 			APELLIDOS 	with Allt(.txtApellidos.Value),;
 			GRADO 		with Allt(.txtGrado.Value),;
 			GRUPO 		with Allt(.txtGrupo.Value),;
 			MATRICULA 	with Allt(.txtMatricula.Value),;
-			FECHANAC 	with Allt(.txtFechaNac.Value)
+			FECHANAC 	with .txtFechaNac.dValue
 endwith
 
 ENDPROC
@@ -186,7 +186,7 @@ ENDPROC
 	<record>
 		<platform>WINDOWS</platform>
 		<uniqueid>_6GQ0QW3BA</uniqueid>
-		<timestamp>1432314904</timestamp>
+		<timestamp>1432443510</timestamp>
 		<class>leyenda</class>
 		<classloc>..\..\..\msllib60\msllib60.vcx</classloc>
 		<baseclass>label</baseclass>
@@ -195,6 +195,7 @@ ENDPROC
 		<properties>Caption = "Id"
 Left = 100
 Top = 19
+TabIndex = 1
 Name = "Leyenda1"
 </properties>
 		<protected/>
@@ -215,7 +216,7 @@ Name = "Leyenda1"
 	<record>
 		<platform>WINDOWS</platform>
 		<uniqueid>_6GQ0QW3BB</uniqueid>
-		<timestamp>1432319544</timestamp>
+		<timestamp>1432443510</timestamp>
 		<class>texto</class>
 		<classloc>..\..\..\msllib60\msllib60.vcx</classloc>
 		<baseclass>textbox</baseclass>
@@ -223,6 +224,7 @@ Name = "Leyenda1"
 		<parent>Formamsl1</parent>
 		<properties>Height = 21
 Left = 111
+TabIndex = 2
 Top = 17
 Width = 45
 Name = "txtClave"
@@ -245,7 +247,7 @@ Name = "txtClave"
 	<record>
 		<platform>WINDOWS</platform>
 		<uniqueid>_6GQ0QW3BC</uniqueid>
-		<timestamp>1432314904</timestamp>
+		<timestamp>1432443510</timestamp>
 		<class>leyenda</class>
 		<classloc>..\..\..\msllib60\msllib60.vcx</classloc>
 		<baseclass>label</baseclass>
@@ -254,6 +256,7 @@ Name = "txtClave"
 		<properties>Caption = "Nombre"
 Left = 71
 Top = 45
+TabIndex = 3
 Name = "Leyenda2"
 </properties>
 		<protected/>
@@ -274,7 +277,7 @@ Name = "Leyenda2"
 	<record>
 		<platform>WINDOWS</platform>
 		<uniqueid>_6GQ0QW3BD</uniqueid>
-		<timestamp>1432314904</timestamp>
+		<timestamp>1432443510</timestamp>
 		<class>leyenda</class>
 		<classloc>..\..\..\msllib60\msllib60.vcx</classloc>
 		<baseclass>label</baseclass>
@@ -283,6 +286,7 @@ Name = "Leyenda2"
 		<properties>Caption = "Apellidos"
 Left = 65
 Top = 69
+TabIndex = 5
 Name = "Leyenda3"
 </properties>
 		<protected/>
@@ -303,7 +307,7 @@ Name = "Leyenda3"
 	<record>
 		<platform>WINDOWS</platform>
 		<uniqueid>_6GQ0QW3BE</uniqueid>
-		<timestamp>1432314904</timestamp>
+		<timestamp>1432443510</timestamp>
 		<class>leyenda</class>
 		<classloc>..\..\..\msllib60\msllib60.vcx</classloc>
 		<baseclass>label</baseclass>
@@ -312,6 +316,7 @@ Name = "Leyenda3"
 		<properties>Caption = "Grado"
 Left = 80
 Top = 92
+TabIndex = 7
 Name = "Leyenda4"
 </properties>
 		<protected/>
@@ -332,7 +337,7 @@ Name = "Leyenda4"
 	<record>
 		<platform>WINDOWS</platform>
 		<uniqueid>_6GQ0QW3BF</uniqueid>
-		<timestamp>1432314904</timestamp>
+		<timestamp>1432443510</timestamp>
 		<class>leyenda</class>
 		<classloc>..\..\..\msllib60\msllib60.vcx</classloc>
 		<baseclass>label</baseclass>
@@ -341,6 +346,7 @@ Name = "Leyenda4"
 		<properties>Caption = "Grupo"
 Left = 78
 Top = 117
+TabIndex = 9
 Name = "Leyenda5"
 </properties>
 		<protected/>
@@ -361,7 +367,7 @@ Name = "Leyenda5"
 	<record>
 		<platform>WINDOWS</platform>
 		<uniqueid>_6GQ0QW3BG</uniqueid>
-		<timestamp>1432314904</timestamp>
+		<timestamp>1432443510</timestamp>
 		<class>leyenda</class>
 		<classloc>..\..\..\msllib60\msllib60.vcx</classloc>
 		<baseclass>label</baseclass>
@@ -370,6 +376,7 @@ Name = "Leyenda5"
 		<properties>Caption = "Matricula"
 Left = 66
 Top = 142
+TabIndex = 11
 Name = "Leyenda6"
 </properties>
 		<protected/>
@@ -390,7 +397,7 @@ Name = "Leyenda6"
 	<record>
 		<platform>WINDOWS</platform>
 		<uniqueid>_6GQ0QW3BH</uniqueid>
-		<timestamp>1432314904</timestamp>
+		<timestamp>1432443510</timestamp>
 		<class>leyenda</class>
 		<classloc>..\..\..\msllib60\msllib60.vcx</classloc>
 		<baseclass>label</baseclass>
@@ -399,6 +406,7 @@ Name = "Leyenda6"
 		<properties>Caption = "Fecha Nacimiento"
 Left = 24
 Top = 168
+TabIndex = 13
 Name = "Leyenda7"
 </properties>
 		<protected/>
@@ -419,7 +427,7 @@ Name = "Leyenda7"
 	<record>
 		<platform>WINDOWS</platform>
 		<uniqueid>_6GQ0QW3BI</uniqueid>
-		<timestamp>1432319544</timestamp>
+		<timestamp>1432443510</timestamp>
 		<class>texto</class>
 		<classloc>..\..\..\msllib60\msllib60.vcx</classloc>
 		<baseclass>textbox</baseclass>
@@ -427,6 +435,7 @@ Name = "Leyenda7"
 		<parent>Formamsl1</parent>
 		<properties>Height = 21
 Left = 111
+TabIndex = 4
 Top = 43
 Width = 190
 Name = "txtNombre"
@@ -449,7 +458,7 @@ Name = "txtNombre"
 	<record>
 		<platform>WINDOWS</platform>
 		<uniqueid>_6GQ0QW3BJ</uniqueid>
-		<timestamp>1432319544</timestamp>
+		<timestamp>1432443510</timestamp>
 		<class>texto</class>
 		<classloc>..\..\..\msllib60\msllib60.vcx</classloc>
 		<baseclass>textbox</baseclass>
@@ -457,6 +466,7 @@ Name = "txtNombre"
 		<parent>Formamsl1</parent>
 		<properties>Height = 21
 Left = 111
+TabIndex = 6
 Top = 67
 Width = 190
 Name = "txtApellidos"
@@ -479,7 +489,7 @@ Name = "txtApellidos"
 	<record>
 		<platform>WINDOWS</platform>
 		<uniqueid>_6GQ0QW3BK</uniqueid>
-		<timestamp>1432319544</timestamp>
+		<timestamp>1432443510</timestamp>
 		<class>texto</class>
 		<classloc>..\..\..\msllib60\msllib60.vcx</classloc>
 		<baseclass>textbox</baseclass>
@@ -487,6 +497,7 @@ Name = "txtApellidos"
 		<parent>Formamsl1</parent>
 		<properties>Height = 21
 Left = 111
+TabIndex = 8
 Top = 90
 Width = 45
 Name = "txtGrado"
@@ -509,14 +520,16 @@ Name = "txtGrado"
 	<record>
 		<platform>WINDOWS</platform>
 		<uniqueid>_6GQ0QW3BL</uniqueid>
-		<timestamp>1432319544</timestamp>
+		<timestamp>1432452861</timestamp>
 		<class>texto</class>
 		<classloc>..\..\..\msllib60\msllib60.vcx</classloc>
 		<baseclass>textbox</baseclass>
 		<objname>txtGrupo</objname>
 		<parent>Formamsl1</parent>
-		<properties>Height = 21
+		<properties>Format = "!"
+Height = 21
 Left = 111
+TabIndex = 10
 Top = 115
 Width = 45
 Name = "txtGrupo"
@@ -539,7 +552,7 @@ Name = "txtGrupo"
 	<record>
 		<platform>WINDOWS</platform>
 		<uniqueid>_6GQ0QW3BM</uniqueid>
-		<timestamp>1432319544</timestamp>
+		<timestamp>1432443510</timestamp>
 		<class>texto</class>
 		<classloc>..\..\..\msllib60\msllib60.vcx</classloc>
 		<baseclass>textbox</baseclass>
@@ -547,6 +560,7 @@ Name = "txtGrupo"
 		<parent>Formamsl1</parent>
 		<properties>Height = 21
 Left = 111
+TabIndex = 12
 Top = 140
 Width = 100
 Name = "txtMatricula"
@@ -569,7 +583,7 @@ Name = "txtMatricula"
 	<record>
 		<platform>WINDOWS</platform>
 		<uniqueid>_6GQ0QW3BN</uniqueid>
-		<timestamp>1432318949</timestamp>
+		<timestamp>1432443510</timestamp>
 		<class>textofecha</class>
 		<classloc>..\..\..\msllib60\msllib60.vcx</classloc>
 		<baseclass>textbox</baseclass>
@@ -577,6 +591,7 @@ Name = "txtMatricula"
 		<parent>Formamsl1</parent>
 		<properties>Height = 21
 Left = 111
+TabIndex = 14
 Top = 165
 Width = 100
 Name = "txtFechaNac"
@@ -599,7 +614,7 @@ Name = "txtFechaNac"
 	<record>
 		<platform>WINDOWS</platform>
 		<uniqueid>_6GQ0QW3BO</uniqueid>
-		<timestamp>1432319866</timestamp>
+		<timestamp>1432443725</timestamp>
 		<class>boton</class>
 		<classloc>..\..\..\msllib60\msllib60.vcx</classloc>
 		<baseclass>commandbutton</baseclass>
@@ -608,6 +623,7 @@ Name = "txtFechaNac"
 		<properties>Top = 210
 Left = 90
 Caption = "\&lt;Grabar"
+TabIndex = 15
 Name = "btnGuardar"
 </properties>
 		<protected/>
@@ -621,13 +637,13 @@ with thisform
 		if .nModo == 1
 			if empty(.txtClave.Value)
 				Alerta('No se puede omitir la clave del alumno')
-				.Clave.SetFocus()
+				.txtClave.SetFocus()
 				return .f.
 			endif
 			
-			if seek(PadL(Allt(.Clave.Value), 5), 'Alumnos')
+			if seek(PadL(Allt(.txtClave.Value), 5), 'Alumnos')
 				Alerta('Ya existe un alumno con la misma clave')
-				.Clave.SetFocus()
+				.txtClave.SetFocus()
 				return .f.
 			endif
 	endif
@@ -639,15 +655,15 @@ with thisform
 		endif
 		
 		do case
-			case nModo == 1
+			case .nModo == 1
 				select Alumnos
 				Append blank
 				.SaveInfo()
 				.Release
-			case nModo == 2
+			case .nModo == 2
 				.SaveInfo()
 				.Release
-			case nModo == 3
+			case .nModo == 3
 				if GetNY('¿Desea eliminar el alumno?')
 					select Alumnos
 					Delete
@@ -673,7 +689,7 @@ ENDPROC
 	<record>
 		<platform>WINDOWS</platform>
 		<uniqueid>_6GQ0QW3BP</uniqueid>
-		<timestamp>1432319866</timestamp>
+		<timestamp>1432443510</timestamp>
 		<class>closebutton</class>
 		<classloc>..\..\..\msllib60\msllib60.vcx</classloc>
 		<baseclass>commandbutton</baseclass>
@@ -682,6 +698,7 @@ ENDPROC
 		<properties>Top = 210
 Left = 205
 Caption = "\&lt;Cerrar"
+TabIndex = 16
 Name = "btnCerrar"
 </properties>
 		<protected/>
