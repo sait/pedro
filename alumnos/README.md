@@ -2,7 +2,7 @@
 El objetivo de este documento es tener registro de como crear catalógos para integrar en desarrollos especiales a SAIT.
 
 ### Nota
-Para poner atajos de teclado en VFP se usa la siguiente expresión \<
+Para poner atajos de teclado en VFP se usa la siguiente expresión [\<] sin los corchetes
 
 Es necesario agregar el archivo refer.prg para no tener problemas de referencia.
 
