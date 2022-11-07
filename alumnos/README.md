@@ -1,8 +1,8 @@
-## Crear catalogo de Alumnos
-El objetivo de este documento es tener registro de como crear catalogos para integrar en desarrollos especiales a SAIT.
+## Crear catalógo de Alumnos
+El objetivo de este documento es tener registro de como crear catalógos para integrar en desarrollos especiales a SAIT.
 
 ### Nota
-Para poner atajos de teclado en VFP se usa la siguiente expresion \<
+Para poner atajos de teclado en VFP se usa la siguiente expresión \<
 
 Es necesario agregar el archivo refer.prg para no tener problemas de referencia.
 
@@ -22,16 +22,16 @@ Es necesario agregar el archivo refer.prg para no tener problemas de referencia.
 ```
 
 2. El siguiente paso es crear las formas que seran utilizadas en el modulo de estudiantes
-    - Forma para el catalogo 
-    - Forma para el CRUD del catalogo
-    - Forma para hacer busqueda
+    - Forma para el catalógo 
+    - Forma para el CRUD del catalógo
+    - Forma para hacer búsquedas
 
-Para crear la forma del catalogo se hace usando la clase catmsl de la libreria msllib60.vcx
+Para crear la forma del catalógo se usa la clase catmsl de la librería msllib60.vcx
 ```
     crea form alumnoscat as catmsl from f:\pedro\msllib60\msllib60.vcx
 ```
 
-Para el catalogo no es necesario cambiar el diseño solo se agrega el siguiente codigo en el evento init de la forma.
+Para el catalógo no es necesario cambiar el diseño solo se agrega el siguiente código en el evento init de la forma.
 ```
 *
 *	init()
@@ -71,23 +71,23 @@ this.cExprs = 'Alumnos.ID|Alumnos.NOMBRE|Alumnos.APELLIDOS|Alumnos.GRADO|Alumnos
 ```
 
 
-Tambien es necesario crear una forma con la clase Formamsl para crear la ventana para el CRUD.
+También es necesario crear una forma con la clase Formamsl para la ventana del CRUD.
 ```
     crea form alumnosdat as Formamsl from f:\pedro\msllib60\msllib60.vcx
 ```
 
-Se crea el diseño de la interfaz y agregan dos metodos y una propiedad
+Se crea el diseño de la interfaz y se agregan dos métodos y una propiedad
 
 - SaveInfo: se usa para guardar o modificar registros
 - CargarInfor: se usa para mostrar la info en el grid
 - nModo: le indica a la ventana del CRUD en que modo mostrarse
-- Init: aquí ira codigo que facilita la integracion de la ventana con SAIT
+- Init: aquí ira código que facilita la integracion de la ventana con SAIT
 
 #### Diseño de la interfaz
 
 ![Diseño](./img/disenio.png)
 
-#### Codigo de SaveInfo 
+#### Código de SaveInfo 
 ```
 *
 *	SaveInfo()
@@ -106,7 +106,7 @@ endwith
 
 ```
 
-#### Codigo de CargarInfo
+#### Código de CargarInfo
 ```
     *
 *	CargarInfo()
@@ -134,7 +134,7 @@ endwith
 
 ```
 
-#### Codigo init de la ventana
+#### Código init de la ventana
 ```
 *
 *	init()
@@ -205,12 +205,12 @@ nModo 3.
 
 ![Ventana para eliminar alumnos](./img/nModo3.png)
 
-Para crear la ventana de busqueda es necesario crear una forma usando la clase busqueda
+Para crear la ventana de búsquedas es necesario crear una forma usando la clase busqueda
 ```
     crea form ListAlum as Busqueda from f:\pedro\msllib60\msllib60.vcx
 ```
 
-Una vez creada la ventana es necesario colocar este codigo en el evento init
+Una vez creada la ventana es necesario colocar este código en el evento init
 ```
 * 
 *	busqueda.init ()
@@ -228,7 +228,7 @@ with thisform
 endwith
 ```
 
-3. Lo siguiente es crear un archivo PRG para copiar la aplicacion en SAIT y que se ejecute como modulo adicional.
+3. Lo siguiente es crear un archivo PRG para copiar la aplicación en SAIT y que se ejecute como módulo adicional.
 
 #### codigo de make.prg
 
@@ -321,7 +321,7 @@ return
 
 ```
 
-4. El codigo anterior compila lo que se desarrolló y lo coloca en la carpeta de SAIT
+4. El código anterior compila lo que se desarrolló y lo coloca en la carpeta de SAIT
 
 5. Lo siguiente es ver los resultado en SAIT
 
