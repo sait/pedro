@@ -1,14 +1,17 @@
 ## Crear catalogo de Alumnos
 El objetivo de este documento es tener registro de como crear catalogos para integrar en desarrollos especiales a SAIT.
 
+### Nota
+Para poner atajos de teclado en VFP se usa la siguiente expresion \<
+
 #### Alumnos Dbf
-    - ID
-    - Nombre
-    - Apellidos
-    - Grado
-    - Grupo
-    - Matricula
-    - Fecha Naciemiento
+- ID
+- Nombre
+- Apellidos
+- Grado
+- Grupo
+- Matricula
+- Fecha Naciemiento
 
 1. Lo primero que se debe hacer es crear un proyecto ya sea meadiante comandos dentro del entorno de VFP o mediante el asistente de VFP.
 
@@ -25,7 +28,8 @@ Para crear la forma del catalogo se hace usando la clase catmsl de la libreria m
 ```
     crea form alumnoscat as catmsl from f:\pedro\msllib60\msllib60.vcx
 ```
-Para el catalogo no es necesario cambiar el diseño solo se agrega el siguiente codigo
+
+Para el catalogo no es necesario cambiar el diseño solo se agrega el siguiente codigo en el evento init de la forma.
 ```
 *
 *	init()
@@ -65,17 +69,23 @@ this.cExprs = 'Alumnos.ID|Alumnos.NOMBRE|Alumnos.APELLIDOS|Alumnos.GRADO|Alumnos
 ```
 
 
-Tambien es necesario crear una forma con la clase Formamsl para crear la ventana para el CRUD.\
+Tambien es necesario crear una forma con la clase Formamsl para crear la ventana para el CRUD.
 ```
     crea form alumnosdat as Formamsl from f:\pedro\msllib60\msllib60.vcx
 ```
-Se agregan los campos requeridos a la interfaz y dos metodos y una propiedad
+
+Se crea el diseño de la interfaz y agregan dos metodos y una propiedad
 
 - SaveInfo: se usa para guardar o modificar registros
 - CargarInfor: se usa para mostrar la info en el grid
 - nModo: le indica a la ventana del CRUD en que modo mostrarse
+- Init: aquí ira codigo que facilita la integracion de la ventana con SAIT
 
-Codigo de SaveInfo 
+#### Diseño de la interfaz
+
+![Diseño](./img/disenio.png)
+
+#### Codigo de SaveInfo 
 ```
 *
 *	SaveInfo()
@@ -94,7 +104,7 @@ endwith
 
 ```
 
-Codigo de CargarInfo
+#### Codigo de CargarInfo
 ```
     *
 *	CargarInfo()
@@ -122,17 +132,76 @@ endwith
 
 ```
 
+#### Codigo init de la ventana
+```
+*
+*	init()
+*
+LParameter nModo, nRec
+
+*
+* nModo
+*	1 = Agregar
+*	2 = Modificar
+*	3 = Eliminar
+*
+
+if not OpenDbf('Alumnos', 'ID')
+	return .F. 
+EndIf
+
+with thisform
+	.txtFechaNac.SetValue(date())
+	if PCount() == 0
+		nModo = 1
+	endif
+	
+	.nModo = nModo
+	
+	if(.nModo == 2 OR .nModo ==3)
+		if(nRec <= 0 OR nRec > Reccount())
+			Alerta('Registro no valido')
+			return .f.
+		endif
+		goto nRec
+	endif
+	
+	do case
+		case .nModo == 1
+			.Caption = 'Agregar Alumno'
+			.btnGuardar.Caption = '\<Agregar'
+			Select Alumnos
+			goto bott
+			.txtClave.Value = PadL(Allt(SigDoc(ID)),5)
+			
+		case .nModo == 2
+			.Caption = 'Modificar Alumno'
+			.btnGuardar.Caption = '\<Modificar'
+			.txtClave.Enabled = .f.
+			.CargarInfo()
+			
+		case nModo == 3
+			.Caption = 'Eliminar Alumno'
+			.btnGuardar.Caption = '\<Eliminar'
+			.CargarInfo()
+			.SetAll('enabled',.f.)
+			.btnGuardar.enabled = .t.
+			.btnCerrar.enabled = .t.
+		endcase
+endwith
+```
+
 nModo 1.
+
 ![Ventana para agregar alumnos](./img/nModo1.png)
 
 nModo 2.
+
 ![Ventana para actualizar alumnos](./img/nModo2.png)
 
 nModo 3.
+
 ![Ventana para eliminar alumnos](./img/nModo3.png)
-
-
-
 
 Para crear la ventana de busqueda es necesario crear una forma usando la clase busqueda
 ```
@@ -157,17 +226,14 @@ with thisform
 endwith
 ```
 
-
 3. Lo siguiente es crear un archivo PRG para copiar la aplicacion en SAIT y que se ejecute como modulo adicional.
 
-codigo de make.prg
+#### codigo de make.prg
 
 ```
 set safety off
-
 build app alumnos from alumnos
 copy file alumnos.app to F:\pedro\demo\alumnos.app
-
 ```
 
 4. El codigo anterior compila lo que se desarrolló y lo coloca en la carpeta de SAIT
