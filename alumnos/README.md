@@ -6,6 +6,8 @@ Para poner atajos de teclado en VFP se usa la siguiente expresión [\ <] ambos s
 
 Es necesario agregar el archivo refer.prg para no tener problemas de referencia.
 
+Todos los formularios creados deben ser integrados al proyecto que se compilará
+
 #### Alumnos Dbf
 - ID
 - Nombre
